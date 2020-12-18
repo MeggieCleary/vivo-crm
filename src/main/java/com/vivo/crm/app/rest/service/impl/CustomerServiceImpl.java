@@ -36,8 +36,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void updateCustomer(String userId, String email) {
         CustomerEntity entity = repository.findByUserId(userId);
-        entity.setEmail(email);
+        if (entity == null)
+            return;
 
+        entity.setEmail(email);
         repository.save(entity);
     }
 
@@ -69,6 +71,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void deleteCustomer(String userId) {
         CustomerEntity entity = repository.findByUserId(userId);
+
         if (entity != null) {
             repository.delete(entity);
         }
