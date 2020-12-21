@@ -22,14 +22,12 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerResponse createCustomer(CustomerRequest customerRequest) {
         ModelMapper modelMapper = new ModelMapper();
-
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
         CustomerEntity entity = modelMapper.map(customerRequest, CustomerEntity.class);
         entity.setUserId(UUID.randomUUID().toString());
 
         repository.save(entity);
-
         return modelMapper.map(entity, CustomerResponse.class);
     }
 
