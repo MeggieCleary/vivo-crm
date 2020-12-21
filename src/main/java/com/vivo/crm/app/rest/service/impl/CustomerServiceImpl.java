@@ -69,7 +69,6 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void deleteCustomer(String userId) {
         CustomerEntity entity = repository.findByUserId(userId);
-
         if (entity != null) {
             repository.delete(entity);
         }
